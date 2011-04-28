@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_gravity="center_vertical|center_horizontal">
+  
+  <TextView
+  	android:text="Êtes vous sur?"
+  	android:layout_gravity="center_horizontal"
+  	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content"
+  	android:layout_marginBottom= "20px">
+  </TextView>
+  
+  <TextView 
+  	android:text="La distance pour aller où désire le client est de :  "
+  	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content"
+  	android:layout_marginBottom= "20px">
+  </TextView>
+  <LinearLayout
+  	android:layout_width="match_parent"
+  	android:layout_height="match_parent"
+  	android:orientation="horizontal"
+  	android:gravity="center_horizontal">
+  
+  <Button
+  	android:id="@+id/AnnulerButton" 
+	android:text="Annuler"
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:layout_marginRight="20px">
+  </Button>
+  
+  <Button 
+  	android:id="@+id/ValiderButton"
+	android:text="Valider"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+  </Button>
+  
+  </LinearLayout>
+  
+</LinearLayout>
