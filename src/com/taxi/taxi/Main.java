@@ -53,11 +53,12 @@ public class Main extends Activity implements OnClickListener {
 		LoginEditText.setText(data.login);
 		data.password = sp.getString("password", "");
 		PasswordEditText.setText(data.password);
-		if(LoginEditText.length() > 0 && PasswordEditText.length() > 0) {
+		if (LoginEditText.length() > 0 && PasswordEditText.length() > 0) {
 			RememberCheckBox.setChecked(true);
 		}
 	}
 
+	@Override
 	public void onClick(View v) {
 
 		data.login = LoginEditText.getText().toString();
@@ -68,26 +69,26 @@ public class Main extends Activity implements OnClickListener {
 		Matcher m2 = p2.matcher(data.password);
 		SharedPreferences sp = getSharedPreferences(Info_Taxi, 0);
 		SharedPreferences.Editor editor = sp.edit();
-		switch(v.getId()) {
+		switch (v.getId()) {
 		case R.id.ConnexionButton:
 
-			if(m.matches()) {
+			if (m.matches()) {
 
-				if(m2.matches()) {
+				if (m2.matches()) {
 					Intent intent = new Intent(Main.this, Menu.class);
 					TaxiRequest req = new TaxiRequest(
 							"http://88.184.190.42:8080");
 					try {
 						data.idTaxi = req.connexion(data.login, data.password);
 						startActivity(intent);
-					} catch(ParamsException e) {
+					} catch (ParamsException e) {
 						e.printStackTrace();
-					} catch(BadLoginException e) {
+					} catch (BadLoginException e) {
 						Toast.makeText(this, "Identifiants incorrects",
 								Toast.LENGTH_SHORT).show();
-					} catch(ConnectionException e) {
+					} catch (ConnectionException e) {
 						Toast.makeText(this,
-								"La connexion au serveur a échoué",
+								"La connexion au serveur a ï¿½chouï¿½",
 								Toast.LENGTH_SHORT).show();
 					}
 				} else {
@@ -98,8 +99,8 @@ public class Main extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.RememberCheckBox:
-			if(RememberCheckBox.isChecked()) {
-				if(m.matches() && m2.matches()) {
+			if (RememberCheckBox.isChecked()) {
+				if (m.matches() && m2.matches()) {
 					editor.putString("password", data.password);
 					editor.putString("login", data.login);
 					editor.commit();

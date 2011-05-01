@@ -41,42 +41,43 @@ public class Liste extends Activity implements OnItemClickListener {
 		data = (SharedData) getApplication();
 		ls.setAdapter(courseAdapter);
 		ls.setOnItemClickListener(this);
-		if(data.position == null) {
+		if (data.position == null) {
 			Toast.makeText(this,
-					"Votre position n'a pas encore été determinée",
+					"Votre position n'a pas encore ï¿½tï¿½ determinï¿½e",
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
 		try {
 			List<Course> listCourses = req.getCourses(data.idTaxi,
 					data.password);
-			for(Course c : listCourses) {
+			for (Course c : listCourses) {
 				CourseTaxi cTaxi = TaxiDirections.getCourseInfos(data.position,
 						c);
 				courseAdapter.add(cTaxi);
 				courseAdapter.notifyDataSetChanged();
 			}
-		} catch(CourseEmptyException e) {
+		} catch (CourseEmptyException e) {
 			e.printStackTrace();
-		} catch(ConnectionException e) {
+		} catch (ConnectionException e) {
 			e.printStackTrace();
-		} catch(ParamsException e) {
+		} catch (ParamsException e) {
 			e.printStackTrace();
-		} catch(BadLoginException e) {
+		} catch (BadLoginException e) {
 			e.printStackTrace();
-		} catch(CourseErrorException e) {
+		} catch (CourseErrorException e) {
 			e.printStackTrace();
-		} catch(DirectionNotFoundException e) {
+		} catch (DirectionNotFoundException e) {
 			e.printStackTrace();
-		} catch(DirectionInvalidRequestException e) {
+		} catch (DirectionInvalidRequestException e) {
 			e.printStackTrace();
-		} catch(DirectionException e) {
+		} catch (DirectionException e) {
 			e.printStackTrace();
-		} catch(DirectionZeroResultsException e) {
+		} catch (DirectionZeroResultsException e) {
 			e.printStackTrace();
 		}
 	}
 
+	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 		CourseTaxi c = courseAdapter.getItem(position);
 		ConfirmCourseDialog dialbox = new ConfirmCourseDialog(this, c);

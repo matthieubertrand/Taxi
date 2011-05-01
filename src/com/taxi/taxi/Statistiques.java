@@ -13,6 +13,7 @@ public class Statistiques extends Activity implements OnClickListener {
 		setContentView(R.layout.statistiques);
 	}
 
+	@Override
 	public void onClick(View v) {
 
 	}

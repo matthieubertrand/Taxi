@@ -41,6 +41,7 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 
 	}
 
+	@Override
 	public void onClick(View v) {
 
 		Intent intent = new Intent(Menu.this, Liste.class);
@@ -48,7 +49,7 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		Intent intent3 = new Intent(Menu.this, Main.class);
 		Intent intent4 = new Intent(Menu.this, About.class);
 
-		switch(v.getId()) {
+		switch (v.getId()) {
 
 		case R.id.ConsulterListeButton:
 
@@ -79,8 +80,9 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		}
 	}
 
+	@Override
 	public void onLocationChanged(Location location) {
-		if(data.position == null) {
+		if (data.position == null) {
 			data.position = new GeoPoint(location.getLatitude(),
 					location.getLongitude());
 		} else {
@@ -89,14 +91,17 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		}
 	}
 
+	@Override
 	public void onProviderDisabled(String provider) {
 
 	}
 
+	@Override
 	public void onProviderEnabled(String provider) {
 
 	}
 
+	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 
 	}

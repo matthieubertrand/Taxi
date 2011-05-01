@@ -45,45 +45,50 @@ public class AfficheCourse extends Activity implements OnClickListener {
 		nomclientTxtbox = (TextView) findViewById(R.id.nomclient);
 		nomclientTxtbox.setText("Nom : " + data.activCourse.cl.nom);
 		prenomclientTxtBox = (TextView) findViewById(R.id.prenomclient);
-		prenomclientTxtBox.setText("Prénom : " + data.activCourse.cl.prenom);
+		prenomclientTxtBox.setText("Prï¿½nom : " + data.activCourse.cl.prenom);
 		telclientTxtBox = (TextView) findViewById(R.id.telclient);
-		telclientTxtBox.setText("Téléphone : " + data.activCourse.cl.phone);
+		telclientTxtBox.setText("Tï¿½lï¿½phone : " + data.activCourse.cl.phone);
 	}
 
+	@Override
 	public void onClick(View v) {
 
 		TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
 		Intent intent = new Intent(AfficheCourse.this, Menu.class);
-		switch(v.getId()) {
+		switch (v.getId()) {
 		case R.id.dialogInfoBtnTelephoner:
-			Intent intent2 = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+data.activCourse.cl.phone));
+			Intent intent2 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
+					+ data.activCourse.cl.phone));
 			startActivity(intent2);
 			break;
 
 		case R.id.dialogInfoBtnNavClient:
-			String uri = "google.navigation:q="+data.activCourse.cl.position.lat+","+data.activCourse.cl.position.lon;
-			Intent intent3 = new Intent(Intent.ACTION_VIEW,Uri.parse(uri));
+			String uri = "google.navigation:q="
+					+ data.activCourse.cl.position.lat + ","
+					+ data.activCourse.cl.position.lon;
+			Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			intent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent3);
 			break;
 		case R.id.dialogInfoBtnNavDest:
-			String uri1 = "google.navigation:q="+data.activCourse.target;
-			Intent intent4 = new Intent(Intent.ACTION_VIEW,Uri.parse(uri1));
+			String uri1 = "google.navigation:q=" + data.activCourse.target;
+			Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse(uri1));
 			startActivity(intent4);
 
 			break;
 		case R.id.dialogInfoBtnAnnuler:
 			try {
-				req.cancelCourse(data.idTaxi, data.password, data.activCourse.id);
+				req.cancelCourse(data.idTaxi, data.password,
+						data.activCourse.id);
 				data.activCourse = null;
-			} catch(ParamsException e1) {
+			} catch (ParamsException e1) {
 				e1.printStackTrace();
-			} catch(CourseNotFoundException e1) {
+			} catch (CourseNotFoundException e1) {
 				e1.printStackTrace();
-			} catch(CourseIdTaxiException e1) {
+			} catch (CourseIdTaxiException e1) {
 				e1.printStackTrace();
-			} catch(ConnectionException e) {
-				Toast.makeText(this, "La connexion au serveur a échoué",
+			} catch (ConnectionException e) {
+				Toast.makeText(this, "La connexion au serveur a ï¿½chouï¿½",
 						Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
 			}
@@ -93,13 +98,13 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			try {
 				req.endCourse(data.idTaxi, data.password, data.activCourse.id);
 				data.activCourse = null;
-			} catch(ParamsException e) {
+			} catch (ParamsException e) {
 				e.printStackTrace();
-			} catch(CourseNotFoundException e) {
+			} catch (CourseNotFoundException e) {
 				e.printStackTrace();
-			} catch(CourseIdTaxiException e) {
+			} catch (CourseIdTaxiException e) {
 				e.printStackTrace();
-			} catch(ConnectionException e) {
+			} catch (ConnectionException e) {
 				e.printStackTrace();
 			}
 			startActivity(intent);

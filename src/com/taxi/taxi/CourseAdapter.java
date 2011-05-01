@@ -31,7 +31,7 @@ public class CourseAdapter extends ArrayAdapter<CourseTaxi> {
 	public View getView(int position, View ConvertView, ViewGroup parent) {
 
 		LinearLayout layout;
-		if(ConvertView == null) {
+		if (ConvertView == null) {
 			layout = (LinearLayout) inf.inflate(textViewResourceId, parent,
 					false);
 		} else {
