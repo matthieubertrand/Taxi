@@ -1,24 +1,32 @@
 package com.taxi.taxi;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import core.localisation.GeoPoint;
 
-public class Menu extends Activity implements OnClickListener {
+public class Menu extends Activity implements OnClickListener, LocationListener {
 
 	Button ConsulterListeButton;
 	Button StatistiquesButton;
 	Button QuitterButton;
 	Button AboutButton;
+	private SharedData data;
+	private LocationManager locManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
+		data = (SharedData) getApplication();
 		ConsulterListeButton = (Button) findViewById(R.id.ConsulterListeButton);
 		ConsulterListeButton.setOnClickListener(this);
 		StatistiquesButton = (Button) findViewById(R.id.StatistiquesButton);
@@ -27,6 +35,9 @@ public class Menu extends Activity implements OnClickListener {
 		QuitterButton.setOnClickListener(this);
 		AboutButton = (Button) findViewById(R.id.AboutButton);
 		AboutButton.setOnClickListener(this);
+		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+				this);
 
 	}
 
@@ -66,6 +77,28 @@ public class Menu extends Activity implements OnClickListener {
 		default:
 			Log.i("taxi", "WrongIdEvent");
 		}
+	}
+
+	public void onLocationChanged(Location location) {
+		if(data.position == null) {
+			data.position = new GeoPoint(location.getLatitude(),
+					location.getLongitude());
+		} else {
+			data.position.lat = location.getLatitude();
+			data.position.lon = location.getLongitude();
+		}
+	}
+
+	public void onProviderDisabled(String provider) {
+
+	}
+
+	public void onProviderEnabled(String provider) {
+
+	}
+
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+
 	}
 
 }
