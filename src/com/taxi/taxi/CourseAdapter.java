@@ -10,7 +10,6 @@ import android.widget.TextView;
 import core.course.CourseTaxi;
 
 public class CourseAdapter extends ArrayAdapter<CourseTaxi> {
-
 	private LayoutInflater inf;
 	private int textViewResourceId;
 
@@ -29,7 +28,6 @@ public class CourseAdapter extends ArrayAdapter<CourseTaxi> {
 
 	@Override
 	public View getView(int position, View ConvertView, ViewGroup parent) {
-
 		LinearLayout layout;
 		if (ConvertView == null)
 			layout = (LinearLayout) inf.inflate(textViewResourceId, parent,
@@ -48,6 +46,5 @@ public class CourseAdapter extends ArrayAdapter<CourseTaxi> {
 		distanceClient.setText("Distance jusqu'au client : "
 				+ getItem(position).distanceClient);
 		return layout;
-
 	}
 }

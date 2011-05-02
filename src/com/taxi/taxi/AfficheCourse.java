@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AfficheCourse extends Activity implements OnClickListener {
-
 	private Button telephoneButton;
 	private Button navClientButton;
 	private Button navDestButton;
@@ -52,7 +51,6 @@ public class AfficheCourse extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-
 		TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
 		Intent intent = new Intent(AfficheCourse.this, Menu.class);
 		switch (v.getId()) {
@@ -61,7 +59,6 @@ public class AfficheCourse extends Activity implements OnClickListener {
 					+ data.activCourse.cl.phone));
 			startActivity(callIntent);
 			break;
-
 		case R.id.dialogInfoBtnNavClient:
 			String navClientUri = "google.navigation:q="
 					+ data.activCourse.cl.position.lat + ","
@@ -77,7 +74,6 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			Intent nacDestIntent = new Intent(Intent.ACTION_VIEW,
 					Uri.parse(navDestUri));
 			startActivity(nacDestIntent);
-
 			break;
 		case R.id.dialogInfoBtnAnnuler:
 			try {

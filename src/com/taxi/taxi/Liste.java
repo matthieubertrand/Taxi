@@ -79,6 +79,5 @@ public class Liste extends Activity implements OnItemClickListener {
 		CourseTaxi c = courseAdapter.getItem(position);
 		ConfirmCourseDialog dialbox = new ConfirmCourseDialog(this, c);
 		dialbox.show();
-
 	}
 }

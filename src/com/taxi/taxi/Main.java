@@ -30,7 +30,6 @@ public class Main extends Activity implements OnClickListener {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		data = (SharedData) getApplication();
@@ -59,7 +58,6 @@ public class Main extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-
 		data.login = LoginEditText.getText().toString();
 		data.password = PasswordEditText.getText().toString();
 		Pattern p = Pattern.compile("[a-z]{6}[0-9]{3}");
@@ -70,9 +68,7 @@ public class Main extends Activity implements OnClickListener {
 		SharedPreferences.Editor editor = sp.edit();
 		switch (v.getId()) {
 		case R.id.ConnexionButton:
-
 			if (m.matches()) {
-
 				if (m2.matches()) {
 					Intent intent = new Intent(Main.this, Menu.class);
 					TaxiRequest req = new TaxiRequest(
@@ -114,7 +110,6 @@ public class Main extends Activity implements OnClickListener {
 			}
 			break;
 		default:
-
 			break;
 		}
 	}

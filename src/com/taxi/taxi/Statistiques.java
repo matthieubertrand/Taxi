@@ -8,13 +8,11 @@ import android.view.View.OnClickListener;
 public class Statistiques extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistiques);
 	}
 
 	@Override
 	public void onClick(View v) {
-
 	}
 }

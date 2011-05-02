@@ -19,7 +19,6 @@ import core.course.CourseTaxi;
 
 public class ConfirmCourseDialog extends Dialog implements
 		android.view.View.OnClickListener {
-
 	private Button ValiderButton;
 	private Button AnnulerButton;
 	private Liste parent;
@@ -63,7 +62,6 @@ public class ConfirmCourseDialog extends Dialog implements
 				+ course.tempsClient);
 		tempsdistTxtBox.setText("Temps de la course : "
 				+ course.tempsDestination);
-
 	}
 
 	@Override
@@ -87,7 +85,6 @@ public class ConfirmCourseDialog extends Dialog implements
 				e.printStackTrace();
 			}
 			break;
-
 		}
 	}
 }

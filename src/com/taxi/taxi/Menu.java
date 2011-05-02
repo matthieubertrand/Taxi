@@ -14,7 +14,6 @@ import android.widget.Button;
 import core.localisation.GeoPoint;
 
 public class Menu extends Activity implements OnClickListener, LocationListener {
-
 	Button ConsulterListeButton;
 	Button StatistiquesButton;
 	Button QuitterButton;
@@ -38,43 +37,27 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
 				this);
-
 	}
 
 	@Override
 	public void onClick(View v) {
-
 		Intent intent = new Intent(Menu.this, Liste.class);
 		Intent intent2 = new Intent(Menu.this, Statistiques.class);
 		Intent intent3 = new Intent(Menu.this, Main.class);
 		Intent intent4 = new Intent(Menu.this, About.class);
-
 		switch (v.getId()) {
-
 		case R.id.ConsulterListeButton:
-
 			startActivity(intent);
-
 			break;
-
 		case R.id.StatistiquesButton:
-
 			startActivity(intent2);
-
 			break;
-
 		case R.id.QuitterButton:
-
 			startActivity(intent3);
-
 			break;
-
 		case R.id.AboutButton:
-
 			startActivity(intent4);
-
 			break;
-
 		default:
 			Log.i("taxi", "WrongIdEvent");
 		}
@@ -93,16 +76,13 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 
 	@Override
 	public void onProviderDisabled(String provider) {
-
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-
 	}
 }
