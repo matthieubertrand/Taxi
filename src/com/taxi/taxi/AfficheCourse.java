@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 public class AfficheCourse extends Activity implements OnClickListener {
 
-	private Button TelephoneButton;
-	private Button NavClientButton;
-	private Button NavDestButton;
-	private Button AnnulerButton;
-	private Button TerminerButton;
+	private Button telephoneButton;
+	private Button navClientButton;
+	private Button navDestButton;
+	private Button annulerButton;
+	private Button terminerButton;
 	private SharedData data;
 	private TextView nomclientTxtbox;
 	private TextView prenomclientTxtBox;
@@ -32,16 +32,16 @@ public class AfficheCourse extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.course);
 		data = (SharedData) getApplication();
-		TelephoneButton = (Button) findViewById(R.id.dialogInfoBtnTelephoner);
-		TelephoneButton.setOnClickListener(this);
-		NavClientButton = (Button) findViewById(R.id.dialogInfoBtnNavClient);
-		NavClientButton.setOnClickListener(this);
-		NavDestButton = (Button) findViewById(R.id.dialogInfoBtnNavDest);
-		NavDestButton.setOnClickListener(this);
-		AnnulerButton = (Button) findViewById(R.id.dialogInfoBtnAnnuler);
-		AnnulerButton.setOnClickListener(this);
-		TerminerButton = (Button) findViewById(R.id.dialogInfoBtnTerminer);
-		TerminerButton.setOnClickListener(this);
+		telephoneButton = (Button) findViewById(R.id.dialogInfoBtnTelephoner);
+		telephoneButton.setOnClickListener(this);
+		navClientButton = (Button) findViewById(R.id.dialogInfoBtnNavClient);
+		navClientButton.setOnClickListener(this);
+		navDestButton = (Button) findViewById(R.id.dialogInfoBtnNavDest);
+		navDestButton.setOnClickListener(this);
+		annulerButton = (Button) findViewById(R.id.dialogInfoBtnAnnuler);
+		annulerButton.setOnClickListener(this);
+		terminerButton = (Button) findViewById(R.id.dialogInfoBtnTerminer);
+		terminerButton.setOnClickListener(this);
 		nomclientTxtbox = (TextView) findViewById(R.id.nomclient);
 		nomclientTxtbox.setText("Nom : " + data.activCourse.cl.nom);
 		prenomclientTxtBox = (TextView) findViewById(R.id.prenomclient);
