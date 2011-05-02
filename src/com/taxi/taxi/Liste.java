@@ -4,6 +4,7 @@ import gmaps.DirectionException;
 import gmaps.DirectionInvalidRequestException;
 import gmaps.DirectionNotFoundException;
 import gmaps.DirectionZeroResultsException;
+import gmaps.OverQueryLimitException;
 import java.util.ArrayList;
 import java.util.List;
 import rest_client.ConnectionException;
@@ -96,6 +97,8 @@ public class Liste extends Activity implements OnItemClickListener {
 			} catch(DirectionException e) {
 				e.printStackTrace();
 			} catch(DirectionZeroResultsException e) {
+				e.printStackTrace();
+			} catch(OverQueryLimitException e) {
 				e.printStackTrace();
 			}
 			Message msg = new Message();

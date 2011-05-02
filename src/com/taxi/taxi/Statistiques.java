@@ -10,6 +10,7 @@ public class Statistiques extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistiques);
+		//TODO Ecrire tous les calculs relatifs auxstatistiques
 	}
 
 	@Override
