@@ -23,11 +23,8 @@ import core.course.Course;
 import core.course.CourseTaxi;
 
 public class Liste extends Activity implements OnItemClickListener {
-	int textViewResourceId;
-	CourseTaxi courseTaxi;
-	int idCourse;
-	CourseAdapter courseAdapter;
-	ListView ls;
+	private CourseAdapter courseAdapter;
+	private ListView ls;
 	private SharedData data;
 
 	@Override
