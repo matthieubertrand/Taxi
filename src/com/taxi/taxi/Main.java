@@ -18,10 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Main extends Activity implements OnClickListener {
-	private static final String INFO_TAXI = "MyPrefsFile"; // création d'un
-															// fichier pour
-															// récupérer les
-															// infos taxi
+	private static final String FILE_INFO_TAXI = "MyPrefsFile";
 	private Button connexionButton;
 	private CheckBox rememberCheckBox;
 	private EditText loginEditText;
@@ -41,7 +38,7 @@ public class Main extends Activity implements OnClickListener {
 		loginEditText.setOnClickListener(this);
 		passwordEditText = (EditText) findViewById(R.id.PasswordEditText);
 		passwordEditText.setOnClickListener(this);
-		SharedPreferences sp = getSharedPreferences(INFO_TAXI, 0);// Méthode
+		SharedPreferences sp = getSharedPreferences(FILE_INFO_TAXI, 0);// Méthode
 																	// pour
 																	// récupérer
 																	// les infos
@@ -64,7 +61,7 @@ public class Main extends Activity implements OnClickListener {
 		Matcher m = p.matcher(data.login);
 		Pattern p2 = Pattern.compile("[a-z0-9]{6,}");
 		Matcher m2 = p2.matcher(data.password);
-		SharedPreferences sp = getSharedPreferences(INFO_TAXI, 0);
+		SharedPreferences sp = getSharedPreferences(FILE_INFO_TAXI, 0);
 		SharedPreferences.Editor editor = sp.edit();
 		switch (v.getId()) {
 		case R.id.ConnexionButton:
