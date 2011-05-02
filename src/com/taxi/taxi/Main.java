@@ -24,6 +24,7 @@ public class Main extends Activity implements OnClickListener {
 	private EditText loginEditText;
 	private EditText passwordEditText;
 	private SharedData data;
+	private SharedPreferences sp;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,12 @@ public class Main extends Activity implements OnClickListener {
 		loginEditText.setOnClickListener(this);
 		passwordEditText = (EditText) findViewById(R.id.PasswordEditText);
 		passwordEditText.setOnClickListener(this);
-		SharedPreferences sp = getSharedPreferences(FILE_INFO_TAXI, 0);
+		sp = getSharedPreferences(FILE_INFO_TAXI, 0);
 		data.login = sp.getString("login", "");
 		loginEditText.setText(data.login);
 		data.password = sp.getString("password", "");
 		passwordEditText.setText(data.password);
-		if (loginEditText.length() > 0 && passwordEditText.length() > 0)
+		if(loginEditText.length() > 0 && passwordEditText.length() > 0)
 			rememberCheckBox.setChecked(true);
 	}
 
@@ -53,61 +54,66 @@ public class Main extends Activity implements OnClickListener {
 		data.password = passwordEditText.getText().toString();
 		Pattern loginPattern = Pattern.compile("[a-z]{6}[0-9]{3}");
 		Matcher loginMatcher = loginPattern.matcher(data.login);
-		//FIXME trouver le pattern pour le mot de passer
+		// FIXME trouver le pattern pour le mot de passe
 		Pattern passwordPattern = Pattern.compile("[a-z0-9]{6,}");
 		Matcher passwordMatcher = passwordPattern.matcher(data.password);
-		if(!loginMatcher.matches()||!passwordMatcher.matches()) {
-			if(!loginMatcher.matches()&&!passwordMatcher.matches()) {
-				Toast.makeText(this,
-						"Login et pasword incorrecte",
+		if(!loginMatcher.matches() || !passwordMatcher.matches()) {
+			if(!loginMatcher.matches() && !passwordMatcher.matches())
+				Toast.makeText(this, "Login et pasword incorrecte",
 						Toast.LENGTH_SHORT).show();
-			} else if(!loginMatcher.matches()) {
-				Toast.makeText(this,
-						"Le login est incorrecte",
+			else if(!loginMatcher.matches())
+				Toast.makeText(this, "Le login est incorrecte",
 						Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(this,
-						"Le password est incorrecte",
+			else
+				Toast.makeText(this, "Le password est incorrecte",
 						Toast.LENGTH_SHORT).show();
-			}
 			return;
 		}
-		SharedPreferences sp = getSharedPreferences(FILE_INFO_TAXI, 0);
-		SharedPreferences.Editor editor = sp.edit();
-		switch (v.getId()) {
+		switch(v.getId()) {
 		case R.id.ConnexionButton:
 			Intent intent = new Intent(Main.this, Menu.class);
-			TaxiRequest req = new TaxiRequest(
-					"http://88.184.190.42:8080");
+			TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
 			try {
 				data.idTaxi = req.connexion(data.login, data.password);
 				startActivity(intent);
-			} catch (ParamsException e) {
+			} catch(ParamsException e) {
 				e.printStackTrace();
-			} catch (BadLoginException e) {
+			} catch(BadLoginException e) {
 				Toast.makeText(this, "Identifiants incorrects",
 						Toast.LENGTH_SHORT).show();
-			} catch (ConnectionException e) {
-				Toast.makeText(this,
-						"La connexion au serveur a échoué",
+			} catch(ConnectionException e) {
+				Toast.makeText(this, "La connexion au serveur a échoué",
 						Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.RememberCheckBox:
-			if (rememberCheckBox.isChecked()) {
-					editor.putString("password", data.password);
-					editor.putString("login", data.login);
-					editor.commit();
+			SharedPreferences.Editor editor = sp.edit();
+			if(rememberCheckBox.isChecked()) {
+				editor.putString("password", data.password);
+				editor.putString("login", data.login);
+				editor.commit();
 			} else {
 				editor.putString("password", "");
 				editor.putString("login", "");
 				editor.commit();
 				loginEditText.setText("");
 				passwordEditText.setText("");
+				rememberCheckBox.setChecked(false);
 			}
 			break;
 		default:
 			break;
 		}
+	}
+
+	@Override
+	protected void onPause() {
+		if(rememberCheckBox.isChecked()) {
+			SharedPreferences.Editor editor = sp.edit();
+			editor.putString("password", data.password);
+			editor.putString("login", data.login);
+			editor.commit();
+		}
+		super.onStop();
 	}
 }
