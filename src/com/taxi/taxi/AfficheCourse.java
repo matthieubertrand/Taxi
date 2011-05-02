@@ -57,23 +57,23 @@ public class AfficheCourse extends Activity implements OnClickListener {
 		Intent intent = new Intent(AfficheCourse.this, Menu.class);
 		switch (v.getId()) {
 		case R.id.dialogInfoBtnTelephoner:
-			Intent intent2 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
+			Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
 					+ data.activCourse.cl.phone));
-			startActivity(intent2);
+			startActivity(callIntent);
 			break;
 
 		case R.id.dialogInfoBtnNavClient:
-			String uri = "google.navigation:q="
+			String navClientUri = "google.navigation:q="
 					+ data.activCourse.cl.position.lat + ","
 					+ data.activCourse.cl.position.lon;
-			Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-			intent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent3);
+			Intent navClientIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(navClientUri));
+			navClientIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(navClientIntent);
 			break;
 		case R.id.dialogInfoBtnNavDest:
-			String uri1 = "google.navigation:q=" + data.activCourse.target;
-			Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse(uri1));
-			startActivity(intent4);
+			String navDestUri = "google.navigation:q=" + data.activCourse.target;
+			Intent nacDestIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(navDestUri));
+			startActivity(nacDestIntent);
 
 			break;
 		case R.id.dialogInfoBtnAnnuler:
