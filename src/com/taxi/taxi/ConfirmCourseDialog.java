@@ -82,6 +82,7 @@ public class ConfirmCourseDialog extends Dialog implements
 				req.choisirCourse(data.idTaxi, data.password, course.id);
 				data.activCourse = course;
 				parent.startActivity(afficherCourseIntent);
+				dismiss();
 			} catch(ParamsException e) {
 				e.printStackTrace();
 			} catch(CourseNotFoundException e) {
