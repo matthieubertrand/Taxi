@@ -1,5 +1,8 @@
 package com.taxi.taxi;
 
+import rest_client.ConnectionException;
+import rest_client.ParamsException;
+import taxi_request.TaxiRequest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +38,7 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		AboutButton = (Button) findViewById(R.id.AboutButton);
 		AboutButton.setOnClickListener(this);
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0,
 				this);
 	}
 
@@ -76,6 +79,15 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		else {
 			data.position.lat = location.getLatitude();
 			data.position.lon = location.getLongitude();
+		}
+		Log.i("taxi", "Location update");
+		TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
+		try {
+			req.updateLocation(data.idTaxi, data.password, data.position);
+		} catch(ParamsException e) {
+			e.printStackTrace();
+		} catch(ConnectionException e) {
+			e.printStackTrace();
 		}
 	}
 
