@@ -109,8 +109,6 @@ public class Liste extends Activity implements OnItemClickListener {
 				e.printStackTrace();
 			} catch(CourseErrorException e) {
 				e.printStackTrace();
-			} catch(OverQueryLimitException e) {
-				e.printStackTrace();
 			}
 			Message msg = new Message();
 			msg.what = UPDATE_UI;
