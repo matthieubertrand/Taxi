@@ -59,13 +59,13 @@ public class Main extends Activity implements OnClickListener {
 		Matcher passwordMatcher = passwordPattern.matcher(data.password);
 		if(!loginMatcher.matches() || !passwordMatcher.matches()) {
 			if(!loginMatcher.matches() && !passwordMatcher.matches())
-				Toast.makeText(this, "Login et pasword incorrecte",
+				Toast.makeText(this, "Login et pasword incorrects",
 						Toast.LENGTH_SHORT).show();
 			else if(!loginMatcher.matches())
-				Toast.makeText(this, "Le login est incorrecte",
+				Toast.makeText(this, "Le login est incorrect",
 						Toast.LENGTH_SHORT).show();
 			else
-				Toast.makeText(this, "Le password est incorrecte",
+				Toast.makeText(this, "Le password est incorrect",
 						Toast.LENGTH_SHORT).show();
 			return;
 		}
@@ -82,7 +82,7 @@ public class Main extends Activity implements OnClickListener {
 				Toast.makeText(this, "Identifiants incorrects",
 						Toast.LENGTH_SHORT).show();
 			} catch(ConnectionException e) {
-				Toast.makeText(this, "La connexion au serveur a échoué",
+				Toast.makeText(this, "La connexion au serveur a échouée",
 						Toast.LENGTH_SHORT).show();
 			}
 			break;

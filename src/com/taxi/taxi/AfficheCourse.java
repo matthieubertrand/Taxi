@@ -44,9 +44,9 @@ public class AfficheCourse extends Activity implements OnClickListener {
 		nomclientTxtbox = (TextView) findViewById(R.id.nomclient);
 		nomclientTxtbox.setText("Nom : " + data.activCourse.cl.nom);
 		prenomclientTxtBox = (TextView) findViewById(R.id.prenomclient);
-		prenomclientTxtBox.setText("Pr�nom : " + data.activCourse.cl.prenom);
+		prenomclientTxtBox.setText("Prénom : " + data.activCourse.cl.prenom);
 		telclientTxtBox = (TextView) findViewById(R.id.telclient);
-		telclientTxtBox.setText("T�l�phone : " + data.activCourse.cl.phone);
+		telclientTxtBox.setText("Téléphone : " + data.activCourse.cl.phone);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			} catch(CourseIdTaxiException e1) {
 				e1.printStackTrace();
 			} catch(ConnectionException e) {
-				Toast.makeText(this, "La connexion au serveur a �chou�",
+				Toast.makeText(this, "La connexion au serveur a échoué",
 						Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
 			}
