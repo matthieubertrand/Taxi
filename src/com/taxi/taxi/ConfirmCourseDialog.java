@@ -83,6 +83,7 @@ public class ConfirmCourseDialog extends Dialog implements
 				data.activCourse = course;
 				parent.startActivity(afficherCourseIntent);
 				dismiss();
+				parent.finish();
 			} catch(ParamsException e) {
 				e.printStackTrace();
 			} catch(CourseNotFoundException e) {
