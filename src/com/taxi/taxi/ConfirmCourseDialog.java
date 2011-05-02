@@ -45,13 +45,13 @@ public class ConfirmCourseDialog extends Dialog implements
 		tempsdistTxtBox = (TextView) findViewById(R.id.tempsdest);
 		try {
 			course = TaxiDirections.getCourseDestInfos(course);
-		} catch (DirectionNotFoundException e) {
+		} catch(DirectionNotFoundException e) {
 			e.printStackTrace();
-		} catch (DirectionInvalidRequestException e) {
+		} catch(DirectionInvalidRequestException e) {
 			e.printStackTrace();
-		} catch (DirectionException e) {
+		} catch(DirectionException e) {
 			e.printStackTrace();
-		} catch (DirectionZeroResultsException e) {
+		} catch(DirectionZeroResultsException e) {
 			e.printStackTrace();
 		}
 		distDestTxtBox.setText("Distance de la course : "
@@ -67,7 +67,7 @@ public class ConfirmCourseDialog extends Dialog implements
 	@Override
 	public void onClick(View v) {
 		Intent afficherCourseIntent = new Intent(parent, AfficheCourse.class);
-		switch (v.getId()) {
+		switch(v.getId()) {
 		case R.id.AnnulerButton:
 			dismiss();
 			break;
@@ -77,11 +77,11 @@ public class ConfirmCourseDialog extends Dialog implements
 				req.choisirCourse(data.idTaxi, data.password, course.id);
 				data.activCourse = course;
 				parent.startActivity(afficherCourseIntent);
-			} catch (ParamsException e) {
+			} catch(ParamsException e) {
 				e.printStackTrace();
-			} catch (CourseNotFoundException e) {
+			} catch(CourseNotFoundException e) {
 				e.printStackTrace();
-			} catch (ConnectionException e) {
+			} catch(ConnectionException e) {
 				e.printStackTrace();
 			}
 			break;

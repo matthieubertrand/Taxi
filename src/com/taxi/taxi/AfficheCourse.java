@@ -53,7 +53,7 @@ public class AfficheCourse extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
 		Intent intent = new Intent(AfficheCourse.this, Menu.class);
-		switch (v.getId()) {
+		switch(v.getId()) {
 		case R.id.dialogInfoBtnTelephoner:
 			Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
 					+ data.activCourse.cl.phone));
@@ -80,13 +80,13 @@ public class AfficheCourse extends Activity implements OnClickListener {
 				req.cancelCourse(data.idTaxi, data.password,
 						data.activCourse.id);
 				data.activCourse = null;
-			} catch (ParamsException e1) {
+			} catch(ParamsException e1) {
 				e1.printStackTrace();
-			} catch (CourseNotFoundException e1) {
+			} catch(CourseNotFoundException e1) {
 				e1.printStackTrace();
-			} catch (CourseIdTaxiException e1) {
+			} catch(CourseIdTaxiException e1) {
 				e1.printStackTrace();
-			} catch (ConnectionException e) {
+			} catch(ConnectionException e) {
 				Toast.makeText(this, "La connexion au serveur a �chou�",
 						Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
@@ -97,13 +97,13 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			try {
 				req.endCourse(data.idTaxi, data.password, data.activCourse.id);
 				data.activCourse = null;
-			} catch (ParamsException e) {
+			} catch(ParamsException e) {
 				e.printStackTrace();
-			} catch (CourseNotFoundException e) {
+			} catch(CourseNotFoundException e) {
 				e.printStackTrace();
-			} catch (CourseIdTaxiException e) {
+			} catch(CourseIdTaxiException e) {
 				e.printStackTrace();
-			} catch (ConnectionException e) {
+			} catch(ConnectionException e) {
 				e.printStackTrace();
 			}
 			startActivity(intent);
