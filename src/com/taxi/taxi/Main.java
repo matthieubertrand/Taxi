@@ -38,13 +38,7 @@ public class Main extends Activity implements OnClickListener {
 		loginEditText.setOnClickListener(this);
 		passwordEditText = (EditText) findViewById(R.id.PasswordEditText);
 		passwordEditText.setOnClickListener(this);
-		SharedPreferences sp = getSharedPreferences(FILE_INFO_TAXI, 0);// Méthode
-																	// pour
-																	// récupérer
-																	// les infos
-																	// taxi en
-																	// mode
-																	// private
+		SharedPreferences sp = getSharedPreferences(FILE_INFO_TAXI, 0);
 		data.login = sp.getString("login", "");
 		loginEditText.setText(data.login);
 		data.password = sp.getString("password", "");
