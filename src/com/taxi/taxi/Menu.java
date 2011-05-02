@@ -14,10 +14,10 @@ import android.widget.Button;
 import core.localisation.GeoPoint;
 
 public class Menu extends Activity implements OnClickListener, LocationListener {
-	Button ConsulterListeButton;
-	Button StatistiquesButton;
-	Button QuitterButton;
-	Button AboutButton;
+	private Button ConsulterListeButton;
+	private Button StatistiquesButton;
+	private Button QuitterButton;
+	private Button AboutButton;
 	private SharedData data;
 	private LocationManager locManager;
 

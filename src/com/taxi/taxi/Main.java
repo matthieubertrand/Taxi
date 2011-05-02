@@ -18,14 +18,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Main extends Activity implements OnClickListener {
-	private static final String Info_Taxi = "MyPrefsFile"; // création d'un
+	private static final String INFO_TAXI = "MyPrefsFile"; // création d'un
 															// fichier pour
 															// récupérer les
 															// infos taxi
-	Button ConnexionButton;
-	CheckBox RememberCheckBox;
-	EditText LoginEditText;
-	EditText PasswordEditText;
+	private Button connexionButton;
+	private CheckBox rememberCheckBox;
+	private EditText loginEditText;
+	private EditText passwordEditText;
 	private SharedData data;
 
 	@Override
@@ -33,15 +33,15 @@ public class Main extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		data = (SharedData) getApplication();
-		ConnexionButton = (Button) findViewById(R.id.ConnexionButton);
-		ConnexionButton.setOnClickListener(this);
-		RememberCheckBox = (CheckBox) findViewById(R.id.RememberCheckBox);
-		RememberCheckBox.setOnClickListener(this);
-		LoginEditText = (EditText) findViewById(R.id.LoginEditText);
-		LoginEditText.setOnClickListener(this);
-		PasswordEditText = (EditText) findViewById(R.id.PasswordEditText);
-		PasswordEditText.setOnClickListener(this);
-		SharedPreferences sp = getSharedPreferences(Info_Taxi, 0);// Méthode
+		connexionButton = (Button) findViewById(R.id.ConnexionButton);
+		connexionButton.setOnClickListener(this);
+		rememberCheckBox = (CheckBox) findViewById(R.id.RememberCheckBox);
+		rememberCheckBox.setOnClickListener(this);
+		loginEditText = (EditText) findViewById(R.id.LoginEditText);
+		loginEditText.setOnClickListener(this);
+		passwordEditText = (EditText) findViewById(R.id.PasswordEditText);
+		passwordEditText.setOnClickListener(this);
+		SharedPreferences sp = getSharedPreferences(INFO_TAXI, 0);// Méthode
 																	// pour
 																	// récupérer
 																	// les infos
@@ -49,22 +49,22 @@ public class Main extends Activity implements OnClickListener {
 																	// mode
 																	// private
 		data.login = sp.getString("login", "");
-		LoginEditText.setText(data.login);
+		loginEditText.setText(data.login);
 		data.password = sp.getString("password", "");
-		PasswordEditText.setText(data.password);
-		if (LoginEditText.length() > 0 && PasswordEditText.length() > 0)
-			RememberCheckBox.setChecked(true);
+		passwordEditText.setText(data.password);
+		if (loginEditText.length() > 0 && passwordEditText.length() > 0)
+			rememberCheckBox.setChecked(true);
 	}
 
 	@Override
 	public void onClick(View v) {
-		data.login = LoginEditText.getText().toString();
-		data.password = PasswordEditText.getText().toString();
+		data.login = loginEditText.getText().toString();
+		data.password = passwordEditText.getText().toString();
 		Pattern p = Pattern.compile("[a-z]{6}[0-9]{3}");
 		Matcher m = p.matcher(data.login);
 		Pattern p2 = Pattern.compile("[a-z0-9]{6,}");
 		Matcher m2 = p2.matcher(data.password);
-		SharedPreferences sp = getSharedPreferences(Info_Taxi, 0);
+		SharedPreferences sp = getSharedPreferences(INFO_TAXI, 0);
 		SharedPreferences.Editor editor = sp.edit();
 		switch (v.getId()) {
 		case R.id.ConnexionButton:
@@ -87,26 +87,26 @@ public class Main extends Activity implements OnClickListener {
 								Toast.LENGTH_SHORT).show();
 					}
 				} else
-					PasswordEditText.setText("");
+					passwordEditText.setText("");
 			} else
-				LoginEditText.setText("");
+				loginEditText.setText("");
 			break;
 		case R.id.RememberCheckBox:
-			if (RememberCheckBox.isChecked()) {
+			if (rememberCheckBox.isChecked()) {
 				if (m.matches() && m2.matches()) {
 					editor.putString("password", data.password);
 					editor.putString("login", data.login);
 					editor.commit();
 				} else {
-					PasswordEditText.setText("");
-					LoginEditText.setText("");
+					passwordEditText.setText("");
+					loginEditText.setText("");
 				}
 			} else {
 				editor.putString("password", "");
 				editor.putString("login", "");
 				editor.commit();
-				LoginEditText.setText("");
-				PasswordEditText.setText("");
+				loginEditText.setText("");
+				passwordEditText.setText("");
 			}
 			break;
 		default:

@@ -19,8 +19,8 @@ import core.course.CourseTaxi;
 
 public class ConfirmCourseDialog extends Dialog implements
 		android.view.View.OnClickListener {
-	private Button ValiderButton;
-	private Button AnnulerButton;
+	private Button validerButton;
+	private Button annulerButton;
 	private Liste parent;
 	private CourseTaxi course;
 	private TextView distDestTxtBox;
@@ -33,10 +33,10 @@ public class ConfirmCourseDialog extends Dialog implements
 		super(context);
 		setContentView(R.layout.dialoguebox);
 		data = (SharedData) ((Liste) context).getApplication();
-		AnnulerButton = (Button) findViewById(R.id.AnnulerButton);
-		AnnulerButton.setOnClickListener(this);
-		ValiderButton = (Button) findViewById(R.id.ValiderButton);
-		ValiderButton.setOnClickListener(this);
+		annulerButton = (Button) findViewById(R.id.AnnulerButton);
+		annulerButton.setOnClickListener(this);
+		validerButton = (Button) findViewById(R.id.ValiderButton);
+		validerButton.setOnClickListener(this);
 		parent = (Liste) context;
 		course = c;
 		distDestTxtBox = (TextView) findViewById(R.id.distdest);
