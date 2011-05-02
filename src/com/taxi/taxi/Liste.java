@@ -4,6 +4,7 @@ import gmaps.DirectionException;
 import gmaps.DirectionInvalidRequestException;
 import gmaps.DirectionNotFoundException;
 import gmaps.DirectionZeroResultsException;
+import java.util.ArrayList;
 import java.util.List;
 import rest_client.ConnectionException;
 import rest_client.CourseEmptyException;
@@ -14,6 +15,9 @@ import taxi_request.BadLoginException;
 import taxi_request.TaxiRequest;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -23,13 +27,15 @@ import core.course.Course;
 import core.course.CourseTaxi;
 
 public class Liste extends Activity implements OnItemClickListener {
+	private static final int UPDATE_UI = 0;
 	private CourseAdapter courseAdapter;
 	private ListView ls;
 	private SharedData data;
+	private Handler handlerTimer = new Handler();
+	private List<CourseTaxi> lCourseTaxi = new ArrayList<CourseTaxi>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.liste);
 		ls = (ListView) findViewById(R.id.list);
@@ -40,39 +46,67 @@ public class Liste extends Activity implements OnItemClickListener {
 		ls.setOnItemClickListener(this);
 		if(data.position == null) {
 			Toast.makeText(this,
-					"Votre position n'a pas encore �t� determin�e",
+					"Votre position n'a pas encore été determinée",
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		try {
-			List<Course> listCourses = req.getCourses(data.idTaxi,
-					data.password);
-			for(Course c : listCourses) {
-				CourseTaxi cTaxi = TaxiDirections.getCourseInfos(data.position,
-						c);
-				courseAdapter.add(cTaxi);
-				courseAdapter.notifyDataSetChanged();
-			}
-		} catch(CourseEmptyException e) {
-			e.printStackTrace();
-		} catch(ConnectionException e) {
-			e.printStackTrace();
-		} catch(ParamsException e) {
-			e.printStackTrace();
-		} catch(BadLoginException e) {
-			e.printStackTrace();
-		} catch(CourseErrorException e) {
-			e.printStackTrace();
-		} catch(DirectionNotFoundException e) {
-			e.printStackTrace();
-		} catch(DirectionInvalidRequestException e) {
-			e.printStackTrace();
-		} catch(DirectionException e) {
-			e.printStackTrace();
-		} catch(DirectionZeroResultsException e) {
-			e.printStackTrace();
-		}
+		handlerTimer.removeCallbacks(updateCourseList);
+		handlerTimer.postDelayed(updateCourseList, 100);
 	}
+
+	private Runnable updateCourseList = new Runnable() {
+		@Override
+		public void run() {
+			try {
+				Log.i("taxi", "go timer");
+				TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
+				List<Course> listCourses = req.getCourses(data.idTaxi,
+						data.password);
+				lCourseTaxi.clear();
+				for(Course c : listCourses) {
+					CourseTaxi cTaxi = TaxiDirections.getCourseInfos(
+							data.position, c);
+					lCourseTaxi.add(cTaxi);
+				}
+			} catch(CourseEmptyException e) {
+				e.printStackTrace();
+			} catch(ConnectionException e) {
+				e.printStackTrace();
+			} catch(ParamsException e) {
+				e.printStackTrace();
+			} catch(BadLoginException e) {
+				e.printStackTrace();
+			} catch(CourseErrorException e) {
+				e.printStackTrace();
+			} catch(DirectionNotFoundException e) {
+				e.printStackTrace();
+			} catch(DirectionInvalidRequestException e) {
+				e.printStackTrace();
+			} catch(DirectionException e) {
+				e.printStackTrace();
+			} catch(DirectionZeroResultsException e) {
+				e.printStackTrace();
+			}
+			Message msg = new Message();
+			msg.what = UPDATE_UI;
+			updateUiEvent.sendMessage(msg);
+			handlerTimer.postDelayed(this, 30000);
+		}
+	};
+	private Handler updateUiEvent = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch(msg.what) {
+			case UPDATE_UI:
+				courseAdapter.clear();
+				for(CourseTaxi c : lCourseTaxi)
+					courseAdapter.add(c);
+				break;
+			default:
+				super.handleMessage(msg);
+			}
+		}
+	};
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
