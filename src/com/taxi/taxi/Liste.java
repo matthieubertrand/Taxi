@@ -65,16 +65,15 @@ public class Liste extends Activity implements OnItemClickListener {
 				Log.i("taxi", "go timer");
 				TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
 				listCourses = req.getCourses(data.idTaxi, data.password);
-				if(listCourses.size() <= 0) {
+				if(listCourses.size() <= 0)
 					lCourseTaxi.clear();
-				} else {
-					for(CourseTaxi c : lCourseTaxi) {
+				else {
+					for(CourseTaxi c : lCourseTaxi)
 						if(!isIn(c)) {
 							Log.i("taxi", "remove taxi course");
 							lCourseTaxi.remove(c);
 						}
-					}
-					for(Course c : listCourses) {
+					for(Course c : listCourses)
 						if(!isIn(c)) {
 							Log.i("taxi", "get maps infos");
 							CourseTaxi cTaxi;
@@ -97,7 +96,6 @@ public class Liste extends Activity implements OnItemClickListener {
 								lCourseTaxi.add(cTaxi);
 							}
 						}
-					}
 				}
 			} catch(CourseEmptyException e) {
 				e.printStackTrace();
@@ -132,18 +130,16 @@ public class Liste extends Activity implements OnItemClickListener {
 	};
 
 	private boolean isIn(Course c) {
-		for(CourseTaxi cTaxi : lCourseTaxi) {
+		for(CourseTaxi cTaxi : lCourseTaxi)
 			if(c.id == cTaxi.id)
 				return true;
-		}
 		return false;
 	}
 
 	private boolean isIn(CourseTaxi cTaxi) {
-		for(Course c : listCourses) {
+		for(Course c : listCourses)
 			if(c.id == cTaxi.id)
 				return true;
-		}
 		return false;
 	}
 

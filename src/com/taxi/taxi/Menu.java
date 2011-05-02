@@ -38,8 +38,8 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		AboutButton = (Button) findViewById(R.id.AboutButton);
 		AboutButton.setOnClickListener(this);
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0,
-				this);
+		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000,
+				0, this);
 	}
 
 	@Override
