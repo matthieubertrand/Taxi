@@ -4,6 +4,7 @@ import gmaps.DirectionException;
 import gmaps.DirectionInvalidRequestException;
 import gmaps.DirectionNotFoundException;
 import gmaps.DirectionZeroResultsException;
+import gmaps.OverQueryLimitException;
 import rest_client.ConnectionException;
 import rest_client.CourseNotFoundException;
 import rest_client.ParamsException;
@@ -53,6 +54,10 @@ public class ConfirmCourseDialog extends Dialog implements
 			e.printStackTrace();
 		} catch(DirectionZeroResultsException e) {
 			e.printStackTrace();
+		} catch(OverQueryLimitException e) {
+			e.printStackTrace();
+			course.distanceDestination = "inconnue";
+			course.tempsDestination = "inconnue";
 		}
 		distDestTxtBox.setText("Distance de la course : "
 				+ course.distanceDestination);
@@ -77,6 +82,8 @@ public class ConfirmCourseDialog extends Dialog implements
 				req.choisirCourse(data.idTaxi, data.password, course.id);
 				data.activCourse = course;
 				parent.startActivity(afficherCourseIntent);
+				dismiss();
+				parent.finish();
 			} catch(ParamsException e) {
 				e.printStackTrace();
 			} catch(CourseNotFoundException e) {

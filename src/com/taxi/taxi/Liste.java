@@ -64,20 +64,39 @@ public class Liste extends Activity implements OnItemClickListener {
 			try {
 				Log.i("taxi", "go timer");
 				TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
-				listCourses = req.getCourses(data.idTaxi,
-						data.password);
-				for(CourseTaxi c:lCourseTaxi) {
-					if(!isIn(c)) {
-						Log.i("taxi", "remove taxi course");
-						lCourseTaxi.remove(c);
+				listCourses = req.getCourses(data.idTaxi, data.password);
+				if(listCourses.size() <= 0) {
+					lCourseTaxi.clear();
+				} else {
+					for(CourseTaxi c : lCourseTaxi) {
+						if(!isIn(c)) {
+							Log.i("taxi", "remove taxi course");
+							lCourseTaxi.remove(c);
+						}
 					}
-				}
-				for(Course c : listCourses) {
-					if(!isIn(c)) {
-						Log.i("taxi", "get maps infos");
-						CourseTaxi cTaxi = TaxiDirections.getCourseInfos(
-								data.position, c);
-						lCourseTaxi.add(cTaxi);
+					for(Course c : listCourses) {
+						if(!isIn(c)) {
+							Log.i("taxi", "get maps infos");
+							CourseTaxi cTaxi;
+							try {
+								cTaxi = TaxiDirections.getCourseInfos(
+										data.position, c);
+								lCourseTaxi.add(cTaxi);
+							} catch(DirectionNotFoundException e) {
+								e.printStackTrace();
+							} catch(DirectionInvalidRequestException e) {
+								e.printStackTrace();
+							} catch(DirectionException e) {
+								e.printStackTrace();
+							} catch(DirectionZeroResultsException e) {
+								e.printStackTrace();
+							} catch(OverQueryLimitException e) {
+								e.printStackTrace();
+								cTaxi = new CourseTaxi(c, "inconnue",
+										"inconnue");
+								lCourseTaxi.add(cTaxi);
+							}
+						}
 					}
 				}
 			} catch(CourseEmptyException e) {
@@ -89,14 +108,6 @@ public class Liste extends Activity implements OnItemClickListener {
 			} catch(BadLoginException e) {
 				e.printStackTrace();
 			} catch(CourseErrorException e) {
-				e.printStackTrace();
-			} catch(DirectionNotFoundException e) {
-				e.printStackTrace();
-			} catch(DirectionInvalidRequestException e) {
-				e.printStackTrace();
-			} catch(DirectionException e) {
-				e.printStackTrace();
-			} catch(DirectionZeroResultsException e) {
 				e.printStackTrace();
 			} catch(OverQueryLimitException e) {
 				e.printStackTrace();
@@ -121,17 +132,17 @@ public class Liste extends Activity implements OnItemClickListener {
 			}
 		}
 	};
-	
+
 	private boolean isIn(Course c) {
-		for(CourseTaxi cTaxi: lCourseTaxi) {
+		for(CourseTaxi cTaxi : lCourseTaxi) {
 			if(c.id == cTaxi.id)
 				return true;
 		}
 		return false;
 	}
-	
+
 	private boolean isIn(CourseTaxi cTaxi) {
-		for(Course c: listCourses) {
+		for(Course c : listCourses) {
 			if(c.id == cTaxi.id)
 				return true;
 		}
