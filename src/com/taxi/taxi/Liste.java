@@ -4,6 +4,7 @@ import gmaps.DirectionException;
 import gmaps.DirectionInvalidRequestException;
 import gmaps.DirectionNotFoundException;
 import gmaps.DirectionZeroResultsException;
+import gmaps.OverQueryLimitException;
 import java.util.ArrayList;
 import java.util.List;
 import rest_client.ConnectionException;
@@ -74,9 +75,24 @@ public class Liste extends Activity implements OnItemClickListener {
 				for(Course c : listCourses) {
 					if(!isIn(c)) {
 						Log.i("taxi", "get maps infos");
-						CourseTaxi cTaxi = TaxiDirections.getCourseInfos(
-								data.position, c);
-						lCourseTaxi.add(cTaxi);
+							CourseTaxi cTaxi;
+							try {
+								cTaxi = TaxiDirections.getCourseInfos(
+										data.position, c);
+								lCourseTaxi.add(cTaxi);
+							} catch(DirectionNotFoundException e) {
+								e.printStackTrace();
+							} catch(DirectionInvalidRequestException e) {
+								e.printStackTrace();
+							} catch(DirectionException e) {
+								e.printStackTrace();
+							} catch(DirectionZeroResultsException e) {
+								e.printStackTrace();
+							} catch(OverQueryLimitException e) {
+								e.printStackTrace();
+								cTaxi = new CourseTaxi(c, "inconnue", "inconnue");
+								lCourseTaxi.add(cTaxi);
+							}
 					}
 				}
 			} catch(CourseEmptyException e) {
@@ -88,14 +104,6 @@ public class Liste extends Activity implements OnItemClickListener {
 			} catch(BadLoginException e) {
 				e.printStackTrace();
 			} catch(CourseErrorException e) {
-				e.printStackTrace();
-			} catch(DirectionNotFoundException e) {
-				e.printStackTrace();
-			} catch(DirectionInvalidRequestException e) {
-				e.printStackTrace();
-			} catch(DirectionException e) {
-				e.printStackTrace();
-			} catch(DirectionZeroResultsException e) {
 				e.printStackTrace();
 			}
 			Message msg = new Message();
