@@ -68,18 +68,17 @@ public class ConfirmCourseDialog extends Dialog implements
 
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(parent, AfficheCourse.class);
+		Intent afficherCourseIntent = new Intent(parent, AfficheCourse.class);
 		switch (v.getId()) {
 		case R.id.AnnulerButton:
 			dismiss();
-
 			break;
 		case R.id.ValiderButton:
 			TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
 			try {
 				req.choisirCourse(data.idTaxi, data.password, course.id);
 				data.activCourse = course;
-				parent.startActivity(intent);
+				parent.startActivity(afficherCourseIntent);
 			} catch (ParamsException e) {
 				e.printStackTrace();
 			} catch (CourseNotFoundException e) {

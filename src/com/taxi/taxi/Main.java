@@ -53,9 +53,8 @@ public class Main extends Activity implements OnClickListener {
 		LoginEditText.setText(data.login);
 		data.password = sp.getString("password", "");
 		PasswordEditText.setText(data.password);
-		if (LoginEditText.length() > 0 && PasswordEditText.length() > 0) {
+		if (LoginEditText.length() > 0 && PasswordEditText.length() > 0)
 			RememberCheckBox.setChecked(true);
-		}
 	}
 
 	@Override
@@ -91,12 +90,10 @@ public class Main extends Activity implements OnClickListener {
 								"La connexion au serveur a �chou�",
 								Toast.LENGTH_SHORT).show();
 					}
-				} else {
+				} else
 					PasswordEditText.setText("");
-				}
-			} else {
+			} else
 				LoginEditText.setText("");
-			}
 			break;
 		case R.id.RememberCheckBox:
 			if (RememberCheckBox.isChecked()) {

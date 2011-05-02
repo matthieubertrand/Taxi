@@ -31,12 +31,11 @@ public class CourseAdapter extends ArrayAdapter<CourseTaxi> {
 	public View getView(int position, View ConvertView, ViewGroup parent) {
 
 		LinearLayout layout;
-		if (ConvertView == null) {
+		if (ConvertView == null)
 			layout = (LinearLayout) inf.inflate(textViewResourceId, parent,
 					false);
-		} else {
+		else
 			layout = (LinearLayout) ConvertView;
-		}
 		TextView destination = (TextView) layout
 				.findViewById(R.id.DestinationText);
 		TextView tempsClient = (TextView) layout
@@ -51,5 +50,4 @@ public class CourseAdapter extends ArrayAdapter<CourseTaxi> {
 		return layout;
 
 	}
-
 }

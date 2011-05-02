@@ -66,13 +66,16 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			String navClientUri = "google.navigation:q="
 					+ data.activCourse.cl.position.lat + ","
 					+ data.activCourse.cl.position.lon;
-			Intent navClientIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(navClientUri));
+			Intent navClientIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(navClientUri));
 			navClientIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(navClientIntent);
 			break;
 		case R.id.dialogInfoBtnNavDest:
-			String navDestUri = "google.navigation:q=" + data.activCourse.target;
-			Intent nacDestIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(navDestUri));
+			String navDestUri = "google.navigation:q="
+					+ data.activCourse.target;
+			Intent nacDestIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(navDestUri));
 			startActivity(nacDestIntent);
 
 			break;
@@ -111,5 +114,4 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			break;
 		}
 	}
-
 }
