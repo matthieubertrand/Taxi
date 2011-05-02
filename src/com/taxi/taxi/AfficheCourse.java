@@ -91,7 +91,7 @@ public class AfficheCourse extends Activity implements OnClickListener {
 						Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
 			}
-			startActivity(intent);
+			finish();
 			break;
 		case R.id.dialogInfoBtnTerminer:
 			try {
@@ -106,7 +106,7 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			} catch(ConnectionException e) {
 				e.printStackTrace();
 			}
-			startActivity(intent);
+			finish();
 			break;
 		}
 	}
