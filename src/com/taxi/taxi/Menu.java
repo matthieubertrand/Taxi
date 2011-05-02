@@ -43,7 +43,6 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 	public void onClick(View v) {
 		Intent intent = new Intent(Menu.this, Liste.class);
 		Intent intent2 = new Intent(Menu.this, Statistiques.class);
-		Intent intent3 = new Intent(Menu.this, Main.class);
 		Intent intent4 = new Intent(Menu.this, About.class);
 		switch(v.getId()) {
 		case R.id.ConsulterListeButton:
@@ -53,7 +52,7 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 			startActivity(intent2);
 			break;
 		case R.id.QuitterButton:
-			startActivity(intent3);
+			finish();
 			break;
 		case R.id.AboutButton:
 			startActivity(intent4);

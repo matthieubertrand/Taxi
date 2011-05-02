@@ -52,7 +52,6 @@ public class AfficheCourse extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
-		Intent intent = new Intent(AfficheCourse.this, Menu.class);
 		switch(v.getId()) {
 		case R.id.dialogInfoBtnTelephoner:
 			Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
