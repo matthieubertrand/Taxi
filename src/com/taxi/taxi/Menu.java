@@ -52,7 +52,7 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 			startActivity(intent2);
 			break;
 		case R.id.QuitterButton:
-			finish();
+			System.exit(0);
 			break;
 		case R.id.AboutButton:
 			startActivity(intent4);
@@ -60,6 +60,12 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		default:
 			Log.i("taxi", "WrongIdEvent");
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		locManager.removeUpdates(this);
+		super.onDestroy();
 	}
 
 	@Override
