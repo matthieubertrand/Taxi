@@ -28,11 +28,13 @@ import core.course.CourseTaxi;
 
 public class Liste extends Activity implements OnItemClickListener {
 	private static final int UPDATE_UI = 0;
+	private static final int UPDATE_TIME = 120000;
 	private CourseAdapter courseAdapter;
 	private ListView ls;
 	private SharedData data;
 	private Handler handlerTimer = new Handler();
 	private List<CourseTaxi> lCourseTaxi = new ArrayList<CourseTaxi>();
+	List<Course> listCourses;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,9 @@ public class Liste extends Activity implements OnItemClickListener {
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
+		Log.i("taxi", "start request list");
 		handlerTimer.removeCallbacks(updateCourseList);
-		handlerTimer.postDelayed(updateCourseList, 100);
+		handlerTimer.postDelayed(updateCourseList, 500);
 	}
 
 	private Runnable updateCourseList = new Runnable() {
@@ -60,13 +63,21 @@ public class Liste extends Activity implements OnItemClickListener {
 			try {
 				Log.i("taxi", "go timer");
 				TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
-				List<Course> listCourses = req.getCourses(data.idTaxi,
+				listCourses = req.getCourses(data.idTaxi,
 						data.password);
-				lCourseTaxi.clear();
+				for(CourseTaxi c:lCourseTaxi) {
+					if(!isIn(c)) {
+						Log.i("taxi", "remove taxi course");
+						lCourseTaxi.remove(c);
+					}
+				}
 				for(Course c : listCourses) {
-					CourseTaxi cTaxi = TaxiDirections.getCourseInfos(
-							data.position, c);
-					lCourseTaxi.add(cTaxi);
+					if(!isIn(c)) {
+						Log.i("taxi", "get maps infos");
+						CourseTaxi cTaxi = TaxiDirections.getCourseInfos(
+								data.position, c);
+						lCourseTaxi.add(cTaxi);
+					}
 				}
 			} catch(CourseEmptyException e) {
 				e.printStackTrace();
@@ -90,7 +101,7 @@ public class Liste extends Activity implements OnItemClickListener {
 			Message msg = new Message();
 			msg.what = UPDATE_UI;
 			updateUiEvent.sendMessage(msg);
-			handlerTimer.postDelayed(this, 30000);
+			handlerTimer.postDelayed(this, UPDATE_TIME);
 		}
 	};
 	private Handler updateUiEvent = new Handler() {
@@ -107,6 +118,22 @@ public class Liste extends Activity implements OnItemClickListener {
 			}
 		}
 	};
+	
+	private boolean isIn(Course c) {
+		for(CourseTaxi cTaxi: lCourseTaxi) {
+			if(c.id == cTaxi.id)
+				return true;
+		}
+		return false;
+	}
+	
+	private boolean isIn(CourseTaxi cTaxi) {
+		for(Course c: listCourses) {
+			if(c.id == cTaxi.id)
+				return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
