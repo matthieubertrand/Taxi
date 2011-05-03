@@ -1,12 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:layout_gravity="center_horizontal">
+	android:layout_height="match_parent">
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_marginBottom="15px">
+		<ImageView android:src="@drawable/client"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="5px" android:layout_marginLeft="5px">
+			<TextView android:text="Courses acceptées"
+				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<TextView android:id="@+id/NbCOurseAccept"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_weight="1" android:gravity="center_vertical">
+			</TextView>
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_marginBottom="15px">
+		<ImageView android:src="@drawable/km" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<LinearLayout android:orientation="vertical"
+			android:layout_marginTop="10px" android:layout_marginLeft="5px"
+			android:layout_width="match_parent" android:layout_height="wrap_content">
+			<TextView android:text="Kilomètres parcourus"
+				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<TextView android:id="@+id/NbKmparcourus"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:gravity="center_vertical">
+			</TextView>
+		</LinearLayout>
+	</LinearLayout>
 
-	<TextView android:id="@+id/nbcourseaccept"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textStyle="bold" />
-	<TextView android:id="@+id/nbkmparcouru" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textStyle="bold" />
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_marginBottom="5px">
+		<ImageView android:src="@drawable/kmmoy"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="10px" android:layout_marginLeft="5px">
+			<TextView android:text="Kilomètres moyens par course"
+				android:layout_width="match_parent" android:layout_height="match_parent" />
+			<TextView android:id="@+id/NbKmMoyen" android:layout_width="match_parent"
+				android:layout_height="match_parent" android:gravity="center_vertical">
+			</TextView>
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="match_parent" android:layout_height="wrap_content">
+		<ImageView android:src="@drawable/tempsmoy"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<LinearLayout android:orientation="vertical"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="10px" android:layout_marginLeft="5px">
+			<TextView android:text="Temps moyen par course"
+				android:layout_width="match_parent" android:layout_height="match_parent" />
+			<TextView android:id="@+id/TempsMoyen" android:layout_width="match_parent"
+				android:layout_height="match_parent" android:gravity="center_vertical">
+			</TextView>
+		</LinearLayout>
+	</LinearLayout>
 </LinearLayout>
-   
