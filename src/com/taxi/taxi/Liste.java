@@ -63,7 +63,7 @@ public class Liste extends Activity implements OnItemClickListener {
 		public void run() {
 			try {
 				Log.i("taxi", "go timer");
-				TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
+				TaxiRequest req = new TaxiRequest(Main.SERVER_ADDR);
 				listCourses = req.getCourses(data.idTaxi, data.password);
 				if(listCourses.size() <= 0)
 					lCourseTaxi.clear();

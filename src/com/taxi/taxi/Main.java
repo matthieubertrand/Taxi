@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Main extends Activity implements OnClickListener {
+	public static final String SERVER_ADDR = "http://88.184.190.42:8080";
 	private static final String FILE_INFO_TAXI = "MyPrefsFile";
 	private Button connexionButton;
 	private CheckBox rememberCheckBox;
@@ -72,7 +73,7 @@ public class Main extends Activity implements OnClickListener {
 		switch(v.getId()) {
 		case R.id.ConnexionButton:
 			Intent intent = new Intent(Main.this, Menu.class);
-			TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
+			TaxiRequest req = new TaxiRequest(SERVER_ADDR);
 			try {
 				data.idTaxi = req.connexion(data.login, data.password);
 				startActivity(intent);

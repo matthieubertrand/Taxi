@@ -81,7 +81,7 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 			data.position.lon = location.getLongitude();
 		}
 		Log.i("taxi", "Location update");
-		TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
+		TaxiRequest req = new TaxiRequest(Main.SERVER_ADDR);
 		try {
 			req.updateLocation(data.idTaxi, data.password, data.position);
 		} catch(ParamsException e) {

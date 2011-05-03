@@ -77,7 +77,7 @@ public class ConfirmCourseDialog extends Dialog implements
 			dismiss();
 			break;
 		case R.id.ValiderButton:
-			TaxiRequest req = new TaxiRequest("http://88.184.190.42:8080");
+			TaxiRequest req = new TaxiRequest(Main.SERVER_ADDR);
 			try {
 				req.choisirCourse(data.idTaxi, data.password, course.id);
 				data.activCourse = course;
