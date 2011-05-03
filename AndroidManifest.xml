@@ -21,7 +21,7 @@
         <activity android:label="Liste" android:name="Liste"></activity>
         <activity android:label="Course" android:name="AfficheCourse"></activity>
         <activity android:label="Statistiques" android:name="Statistiques"></activity>
-        <activity android:label="About" android:name="About"></activity>
+        <activity android:name="About" android:label="A propos"></activity>
 
     </application>
 </manifest>
