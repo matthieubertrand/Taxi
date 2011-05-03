@@ -31,22 +31,22 @@ public class Liste extends Activity implements OnItemClickListener {
 	private static final int UPDATE_UI = 0;
 	private static final int UPDATE_TIME = 120000;
 	private CourseAdapter courseAdapter;
-	private ListView ls;
+	private ListView listCoursesDispo;
 	private SharedData data;
 	private Handler handlerTimer = new Handler();
 	private List<CourseTaxi> lCourseTaxi = new ArrayList<CourseTaxi>();
-	List<Course> listCourses;
+	private List<Course> listCourses;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.liste);
-		ls = (ListView) findViewById(R.id.list);
+		listCoursesDispo = (ListView) findViewById(R.id.list);
 		courseAdapter = new CourseAdapter(this, R.layout.listview);
 		courseAdapter.setNotifyOnChange(true);
 		data = (SharedData) getApplication();
-		ls.setAdapter(courseAdapter);
-		ls.setOnItemClickListener(this);
+		listCoursesDispo.setAdapter(courseAdapter);
+		listCoursesDispo.setOnItemClickListener(this);
 		if(data.position == null) {
 			Toast.makeText(this,
 					"Votre position n'a pas encore été determinée",
