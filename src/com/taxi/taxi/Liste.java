@@ -1,12 +1,8 @@
 package com.taxi.taxi;
 
-import gmaps.DirectionException;
-import gmaps.DirectionInvalidRequestException;
-import gmaps.DirectionNotFoundException;
-import gmaps.DirectionZeroResultsException;
-import gmaps.OverQueryLimitException;
 import java.util.ArrayList;
 import java.util.List;
+import bing.DirectionNotFoundException;
 import rest_client.ConnectionException;
 import rest_client.CourseEmptyException;
 import rest_client.CourseErrorException;
@@ -83,16 +79,7 @@ public class Liste extends Activity implements OnItemClickListener {
 								lCourseTaxi.add(cTaxi);
 							} catch(DirectionNotFoundException e) {
 								e.printStackTrace();
-							} catch(DirectionInvalidRequestException e) {
-								e.printStackTrace();
-							} catch(DirectionException e) {
-								e.printStackTrace();
-							} catch(DirectionZeroResultsException e) {
-								e.printStackTrace();
-							} catch(OverQueryLimitException e) {
-								e.printStackTrace();
-								cTaxi = new CourseTaxi(c, "inconnue",
-										"inconnue");
+								cTaxi = new CourseTaxi(c, "inconnue", "inconnu");
 								lCourseTaxi.add(cTaxi);
 							}
 						}

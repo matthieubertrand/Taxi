@@ -1,10 +1,6 @@
 package com.taxi.taxi;
 
-import gmaps.DirectionException;
-import gmaps.DirectionInvalidRequestException;
-import gmaps.DirectionNotFoundException;
-import gmaps.DirectionZeroResultsException;
-import gmaps.OverQueryLimitException;
+import bing.DirectionNotFoundException;
 import rest_client.ConnectionException;
 import rest_client.CourseNotFoundException;
 import rest_client.ParamsException;
@@ -48,16 +44,8 @@ public class ConfirmCourseDialog extends Dialog implements
 			course = TaxiDirections.getCourseDestInfos(course);
 		} catch(DirectionNotFoundException e) {
 			e.printStackTrace();
-		} catch(DirectionInvalidRequestException e) {
-			e.printStackTrace();
-		} catch(DirectionException e) {
-			e.printStackTrace();
-		} catch(DirectionZeroResultsException e) {
-			e.printStackTrace();
-		} catch(OverQueryLimitException e) {
-			e.printStackTrace();
 			course.distanceDestination = "inconnue";
-			course.tempsDestination = "inconnue";
+			course.tempsDestination = "inconnu";
 		}
 		distDestTxtBox.setText("Distance de la course : "
 				+ course.distanceDestination);
