@@ -133,7 +133,19 @@ public class Liste extends Activity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 		CourseTaxi c = courseAdapter.getItem(position);
+		handlerTimer.removeCallbacks(updateCourseList);
 		ConfirmCourseDialog dialbox = new ConfirmCourseDialog(this, c);
 		dialbox.show();
+	}
+
+	public void stopTimer() {
+		Log.i("taxi", "stop timer");
+		handlerTimer.removeCallbacks(updateCourseList);
+	}
+
+	@Override
+	public void onBackPressed() {
+		stopTimer();
+		finish();
 	}
 }
