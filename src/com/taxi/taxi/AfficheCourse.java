@@ -4,6 +4,7 @@ import rest_client.ConnectionException;
 import rest_client.CourseIdTaxiException;
 import rest_client.CourseNotFoundException;
 import rest_client.ParamsException;
+import taxi_request.BadLoginException;
 import taxi_request.TaxiRequest;
 import android.app.Activity;
 import android.content.Intent;
@@ -89,6 +90,10 @@ public class AfficheCourse extends Activity implements OnClickListener {
 				Toast.makeText(this, "La connexion au serveur a échoué",
 						Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
+			} catch(BadLoginException e) {
+				Toast.makeText(this, "L'authentification a échoué",
+						Toast.LENGTH_SHORT).show();
+				e.printStackTrace();
 			}
 			finish();
 			break;
@@ -103,6 +108,8 @@ public class AfficheCourse extends Activity implements OnClickListener {
 			} catch(CourseIdTaxiException e) {
 				e.printStackTrace();
 			} catch(ConnectionException e) {
+				e.printStackTrace();
+			} catch(BadLoginException e) {
 				e.printStackTrace();
 			}
 			finish();
