@@ -1,19 +1,27 @@
 package com.taxi.taxi;
 
+
+import rest_client.ConnectionException;
+import taxi_request.BadLoginException;
+import taxi_request.TaxiRequest;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-
-public class Statistiques extends Activity implements OnClickListener {
+import android.widget.TextView;
+public class Statistiques extends Activity  {
+	private SharedData data;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistiques);
-		// TODO Ecrire tous les calculs relatifs auxstatistiques
+		TaxiRequest req = new TaxiRequest(Main.SERVER_ADDR);
+		TextView nbcourse = (TextView) findViewById(R.id.NbCOurseAccept);
+		try {
+			nbcourse.setText(req.getNbCourse(data.idTaxi, data.password));
+		} catch(ConnectionException e) {
+			e.printStackTrace();
+		} catch(BadLoginException e) {
+			e.printStackTrace();
+		}
 	}
 
-	@Override
-	public void onClick(View v) {
-	}
 }
