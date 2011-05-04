@@ -13,10 +13,11 @@ public class Statistiques extends Activity  {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistiques);
+		data=(SharedData) getApplication();
 		TaxiRequest req = new TaxiRequest(Main.SERVER_ADDR);
 		TextView nbcourse = (TextView) findViewById(R.id.NbCOurseAccept);
 		try {
-			nbcourse.setText(req.getNbCourse(data.idTaxi, data.password));
+			nbcourse.setText(String.valueOf(req.getNbCourse(data.idTaxi, data.password)));
 		} catch(ConnectionException e) {
 			e.printStackTrace();
 		} catch(BadLoginException e) {
