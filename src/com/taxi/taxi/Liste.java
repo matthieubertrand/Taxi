@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import core.course.Course;
 import core.course.CourseTaxi;
+import core.localisation.GeoPoint;
 
 public class Liste extends Activity implements OnItemClickListener {
 	private static final int UPDATE_UI = 0;
@@ -47,6 +48,12 @@ public class Liste extends Activity implements OnItemClickListener {
 			Toast.makeText(this,
 					"Votre position n'a pas encore été determinée",
 					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if(!TaxiDirections.isZoneOk(data.position, new GeoPoint(48.404209, 2.700570), 50)) {
+			Log.i("taxi", "zone not ok");
+			Toast.makeText(this, "Hors de la zone",
+					Toast.LENGTH_LONG).show();
 			return;
 		}
 		Log.i("taxi", "start request list");
