@@ -5,7 +5,6 @@ import rest_client.ConnectionException;
 import rest_client.CourseNotFoundException;
 import rest_client.ParamsException;
 import taxi_directions.TaxiDirections;
-import taxi_request.BadLoginException;
 import taxi_request.TaxiRequest;
 import android.app.Dialog;
 import android.content.Context;
@@ -79,8 +78,6 @@ public class ConfirmCourseDialog extends Dialog implements
 			} catch(CourseNotFoundException e) {
 				e.printStackTrace();
 			} catch(ConnectionException e) {
-				e.printStackTrace();
-			} catch(BadLoginException e) {
 				e.printStackTrace();
 			}
 			break;

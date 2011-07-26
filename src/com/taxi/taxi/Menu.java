@@ -2,7 +2,6 @@ package com.taxi.taxi;
 
 import rest_client.ConnectionException;
 import rest_client.ParamsException;
-import taxi_request.BadLoginException;
 import taxi_request.TaxiRequest;
 import android.app.Activity;
 import android.content.Context;
@@ -88,8 +87,6 @@ public class Menu extends Activity implements OnClickListener, LocationListener 
 		} catch(ParamsException e) {
 			e.printStackTrace();
 		} catch(ConnectionException e) {
-			e.printStackTrace();
-		} catch(BadLoginException e) {
 			e.printStackTrace();
 		}
 	}
