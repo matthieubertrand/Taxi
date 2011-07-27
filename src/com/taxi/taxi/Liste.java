@@ -2,7 +2,8 @@ package com.taxi.taxi;
 
 import java.util.ArrayList;
 import java.util.List;
-import bing.DirectionNotFoundException;
+
+import maps.DirectionNotFoundException;
 import rest_client.ConnectionException;
 import rest_client.CourseEmptyException;
 import rest_client.CourseErrorException;

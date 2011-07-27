@@ -1,6 +1,6 @@
 package com.taxi.taxi;
 
-import bing.DirectionNotFoundException;
+import maps.DirectionNotFoundException;
 import rest_client.ConnectionException;
 import rest_client.CourseNotFoundException;
 import rest_client.ParamsException;
